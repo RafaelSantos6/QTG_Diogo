@@ -20,6 +20,10 @@ async function buscarReceitas(categoria) {
                 <div class="receita-card">
                     <img src="${meal.strMealThumb}">
                     <h3>${meal.strMeal}</h3>
+
+                    <button class="btn-detalhes" onclick="verDetalhes(${meal.idMeal})">
+                        Ver detalhes
+                    </button>
                 </div>
             `)
             .join("");
@@ -32,4 +36,9 @@ async function buscarReceitas(categoria) {
         document.getElementById("resultado").innerHTML =
             "<p>Erro ao carregar receitas.</p>";
     }
+}
+
+// Função usada pelo botão
+function verDetalhes(id) {
+    window.location.href = `detalhes.html?id=${id}`;
 }
