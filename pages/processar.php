@@ -73,10 +73,38 @@ if ($tipo == 'cadastro_usuario') {
         </script>";
     }
 
+    
+// Cadastar refeicao 
+} elseif ($tipo == 'cadastro_refeicao') {
+
+    $nome_receita = $_POST['nome_receita'] ?? '';
+    $Igredientes = $_POST['Igredientes'] ?? '';
+    $modo_preparo = $_POST['modo_preparo'] ?? '';
+    $dificuldade = $_POST['dificuldade'] ?? '';
+
+    $sql = "INSERT INTO receitas (nome_receita, Igredientes, modo_preparo, dificuldade) 
+            VALUES ('$nome_receita', '$Igredientes', '$modo_preparo', '$dificuldade')";
+
+     if ($conn->query($sql) === TRUE) {
+        echo "<script>
+            alert('Receita enviada com sucesso!');
+            window.location.href = 'receitas.html';
+        </script>";
+    } else {
+        echo "<script>
+            alert('Erro ao salvar receita: " . addslashes($conn->error) . "');
+            window.history.back();
+        </script>";
+    }
+
 } else {
     // Caso alguém tente acessar o arquivo direto sem enviar formulário
     echo "Erro: Nenhum formulário identificado.";
 }
+
+
+
+
 
 $conn->close();
 ?>
